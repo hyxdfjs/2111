@@ -1,3 +1,12 @@
+/******00-登录和注册的改变（用户名）******/
+let name = document.querySelector('#userlogin');
+let quit = document.querySelector('#quit');
+// console.log(JSON.parse(localStorage.getItem('name')));
+name.innerHTML = JSON.parse(localStorage.getItem('name'));
+if ( name != '') {
+    quit.innerHTML = '退出'
+} 
+
 /******01-倒计时秒杀******/
 var hour = document.querySelector('.hour');  //时
 var minute = document.querySelector('.minute');  //分
@@ -83,3 +92,6 @@ item.parentNode.onmouseover = function () {
 item.parentNode.onmouseout = function () {
     auto()
 }
+let name = document.querySelector('#userlogin')
+console.log(localStorage.getItem('name'));
+name.innerHTML = localStorage.getItem('name');

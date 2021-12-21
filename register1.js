@@ -29,48 +29,25 @@ pwds.onblur = () => {
     }
 }
 let txt2 = document.querySelector('.txt2');
-var arr = []
-//获取数据库已有账号
-axios.get('http://localhost:3000/posts', {
-    user: username
-}).then(
-    ({
-        data
-    }) => {
-        // console.log(data)
-        for (i = 0; i < data.length; i++) {
-            console.log(data[i].user);
-            var res = arr.push(data[i].user)
-            // console.log(arr)
-        }
-    }
-)
-//可用则发送至数据库
+
+
+//
 txt2.onclick = () => {
-    if (des[0].innerHTML == '√' && des[1].innerHTML == '√' && des[2].innerHTML == '√') {
-        function inArr(value) {
-            for (i = 0; i < arr.length; i++) {
-                if (value != arr[i]) {
-                    return true
-                } else {
-                    return false
-                }
-            }
-        }
-        if (inArr(user.value)) {
+    axios.get(`http://localhost:3000/posts?user=${user.value}`
+      // user: username
+    ).then(({data}) => {
+        //    console.log(data)
+        if (data != '' && user.value == data[0].user) {
+            alert('账号已存在')
+        } else {
             axios.post('http://localhost:3000/posts', {
                 user: user.value,
                 pwd: pwd.value
             }).then(
-                // ({
-                //     data
-                // }) => {
-                //     console.log(data);
-                // }
-                window.location.href="index1.html"
+                localStorage.setItem('name', JSON.stringify(user.value)),
+                window.location.href="index1.html",
             )
-        } else{
-            alert('账号已存在')
         }
-    }
+       }
+    )
 }
